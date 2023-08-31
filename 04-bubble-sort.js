@@ -27,9 +27,7 @@ const bubbleSortRecursion = (arr, n) => {
 
   for (let i = 0; i < n - 1; i++) {
     if (arr[i] > arr[i + 1]) {
-      let temp = arr[i];
-      arr[i] = arr[i + 1];
-      arr[i + 1] = temp;
+      swap(arr, i, i + 1);
     }
   }
 
