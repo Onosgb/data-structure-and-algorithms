@@ -57,20 +57,20 @@ const recursion = (arr, x, start, end) => {
 const result = recursion(arr, x, start, end);
 
 /*
- *DIVID AND CONQUER SEARCH PATTERN
+ * BINARY SEARCH WITH WHILE LOOP
  */
 
 function search(arr, val) {
-  let min = 0;
-  let max = arr.length - 1;
-  while (min <= max) {
-    let middle = Math.floor((min + max) / 2);
-    if (arr[middle] < val) {
-      min = middle + 1;
-    } else if (arr[middle] > val) {
-      max = middle - 1;
+  let start = 0;
+  let end = arr.length - 1;
+  while (start <= end) {
+    let x = Math.floor((start + end) / 2);
+    if (arr[x] < val) {
+      start = x + 1;
+    } else if (arr[x] > val) {
+      end = x - 1;
     } else {
-      return middle;
+      return x;
     }
   }
   return -1;
