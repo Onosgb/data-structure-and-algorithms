@@ -1,4 +1,4 @@
-// 
+//
 
 // function myFunction({param = true}) {
 
@@ -49,38 +49,33 @@
 // }
 //  loga()
 
+function createPhoneNumber(numbers) {
+  var format = "(xxx) xxx-xxxx";
 
-
-
-
-function createPhoneNumber(numbers){
-    var format = "(xxx) xxx-xxxx";
-    
-    for(var i = 0; i < numbers.length; i++)
-    {
-      format = format.replace('x', numbers[i]);
-    }
-    
-    return format;
+  for (var i = 0; i < numbers.length; i++) {
+    format = format.replace("x", numbers[i]);
   }
-  
-console.log(createPhoneNumber([1,2,3,4,5,6,7,8,9,0]));
+
+  return format;
+}
+
+console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]));
 
 function createPhoneNumber2(numbers) {
-    let firstPart ="";
-    let secondPart = "";
-    let thirdPart = "";
+  let firstPart = "";
+  let secondPart = "";
+  let thirdPart = "";
 
-    for(let i = 0; i < numbers.length; i++) {
-       if(i < 3) {
-        firstPart += (numbers[i].toString());
-       } else if( i < 6) {
-           secondPart +=(numbers[i].toString());
-       } else {
-           thirdPart += (numbers[i].toString())
-       }
+  for (let i = 0; i < numbers.length; i++) {
+    if (i < 3) {
+      firstPart += numbers[i].toString();
+    } else if (i < 6) {
+      secondPart += numbers[i].toString();
+    } else {
+      thirdPart += numbers[i].toString();
     }
+  }
 
-    return `(${firstPart}) ${secondPart}-${thirdPart}`;
+  return `(${firstPart}) ${secondPart}-${thirdPart}`;
 }
-console.log(createPhoneNumber2([1,2,3,4,5,6,7,8,9,0]));
+console.log(createPhoneNumber2([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]));

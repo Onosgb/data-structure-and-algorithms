@@ -51,7 +51,7 @@ const recursion = (arr, x, start, end) => {
   // If element mid is greater than x, search the left;
   if (arr[mid] > x) return recursion(arr, x, start, mid - 1);
   // if element mid is less than x search the right;
-  else return recursion(arr, x, mid + 1, end);
+  return recursion(arr, x, mid + 1, end);
 };
 
 const result = recursion(arr, x, start, end);
@@ -63,14 +63,15 @@ const result = recursion(arr, x, start, end);
 function search(arr, val) {
   let start = 0;
   let end = arr.length - 1;
+
   while (start <= end) {
-    let x = Math.floor((start + end) / 2);
-    if (arr[x] < val) {
-      start = x + 1;
-    } else if (arr[x] > val) {
-      end = x - 1;
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid] < val) {
+      start = mid + 1;
+    } else if (arr[mid] > val) {
+      end = mid - 1;
     } else {
-      return x;
+      return mid;
     }
   }
   return -1;
