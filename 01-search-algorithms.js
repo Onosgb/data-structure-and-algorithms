@@ -8,7 +8,7 @@ const arr = [
 ];
 
 // Linear search algorithm
-function findX(arr, search_element) {
+function linearSearch(arr, search_element) {
   let left = 0;
   let right = arr.length - 1;
   let position = -1;
@@ -31,7 +31,7 @@ function findX(arr, search_element) {
   return position;
 }
 
-// console.log(findX(arr, 199));
+// console.log(linearSearch(arr, 199));
 
 /**
  *  BINARY SEARCH ALGORITHM
@@ -60,7 +60,7 @@ const result = recursion(arr, x, start, end);
  * BINARY SEARCH WITH WHILE LOOP
  */
 
-function search(arr, val) {
+function binarySearch(arr, val) {
   let start = 0;
   let end = arr.length - 1;
 
