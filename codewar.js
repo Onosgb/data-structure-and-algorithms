@@ -6,26 +6,39 @@ function swap(arr, index1, index2) {
   arr[index2] = temp;
 }
 
-function quickSort(arr) {
+function mergeSort(arr) {
   if (arr.length <= 1) return arr;
 
-  let pivot = arr[0];
+  // Split the array into two halves
+  const middle = Math.floor(arr.length / 2);
+  const left = arr.slice(0, middle);
+  const right = arr.slice(middle);
 
-  let left = [],
-    right = [];
+  // Recursively sort both halves
+  const sortedLeft = mergeSort(left);
+  const sortedRight = mergeSort(right);
 
-  for (let i = 1; i < arr.length; i++) {
-    if (arr[i] < pivot) {
-      left.push(arr[i]);
+  // merge the two arrays
+  return merge(sortedLeft, sortedRight);
+}
+
+function merge(left, right) {
+  let result = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  // Compare elements from both arrays and merge them in sorted order
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      result.push(left[leftIndex]);
+      leftIndex++;
     } else {
-      right.push(arr[i]);
+      result.push(right[rightIndex]);
+      rightIndex++;
     }
   }
 
-  const leftSort = quickSort(left);
-  const rightSort = quickSort(right);
-
-  return [...leftSort, pivot, ...rightSort];
+  // Add any remaining elements from both arrays (if any)
+  return result.concat(left.slice(leftIndex), right.slice(rightIndex));
 }
-
-console.log("quickSort: ", quickSort(arr));
+console.log(mergeSort(arr));
