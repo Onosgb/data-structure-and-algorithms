@@ -12,28 +12,21 @@ Assertion messages may be unclear about what they display in some languages. If 
 */
 
 function duplicateEncode(word) {
-  // convert the word to lowercase;
+  // Convert the word to lowercase
   word = word.toLowerCase();
 
-  // split the word to string
-  word = word.split("");
+  // Create a Map to track character counts
+  const charCount = new Map();
 
-  // track each words and count their number
-  let appeard = {};
-
+  // Iterate through each character and count occurrences
   for (let i = 0; i < word.length; i++) {
-    // if word already exist add 1
-    if (Object.keys(appeard).includes(word[i])) {
-      appeard[word[i]] = appeard[word[i]] + 1;
-    } else {
-      appeard[word[i]] = 1;
-    }
+    const char = word[i];
+    charCount.set(char, (charCount.get(char) || 0) + 1);
   }
 
-  // manipulate the word and return the replace string;
+  // Map characters to '(' or ')' based on their count
   return word
-    .map((dt) => {
-      return appeard[dt] > 1 ? ")" : "(";
-    })
+    .split("")
+    .map((char) => (charCount.get(char) > 1 ? ")" : "("))
     .join("");
 }
