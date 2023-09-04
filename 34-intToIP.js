@@ -20,16 +20,20 @@ Examples
 */
 
 function int32ToIp(int32) {
+  // Convert the number to its binary representation as a string
   let binaryStr = int32.toString(2).padStart(32, "0");
 
+  // Divide the binary string into four octets
   let octets = [];
   for (let i = 0; i < 32; i += 8) {
     octets.push(parseInt(binaryStr.slice(i, i + 8), 2));
   }
 
+  // Join the octets with dots to form the IP address
   return octets.join(".");
 }
 
-let result = int32ToIp(2149583361);
-
-console.log("results: ", result);
+// Test cases
+console.log(int32ToIp(2149583361)); // Output: "128.32.10.1"
+console.log(int32ToIp(32)); // Output: "0.0.0.32"
+console.log(int32ToIp(0)); // Output: "0.0.0.0"
