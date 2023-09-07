@@ -11,16 +11,14 @@ Examples (input --> output):
 */
 
 function rgb(r, g, b) {
-  r = clamp(r);
-  g = clamp(g);
-  b = clamp(b);
-  return r + g + b;
+  return toHex(r) + toHex(g) + toHex(b);
 }
 
-function clamp(rgb) {
+function toHex(rgb) {
   rgb = Math.max(0, Math.min(255, rgb));
 
   return rgb.toString(16).padStart(2, "0");
 }
 
-console.log(rgb("148", "0", "211"));
+const result = rgb("148", "0", "211");
+console.log(result);
