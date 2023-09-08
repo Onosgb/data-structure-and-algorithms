@@ -22,35 +22,34 @@ In some languages, it is possible to mutate the input to the function. This is s
 */
 
 function calculateScore(dice) {
-  // Initialize an array to keep track of the count of each dice value
-  const counts = [0, 0, 0, 0, 0, 0];
+  let counts = [0, 0, 0, 0, 0, 0];
 
-  // Loop through the dice and count each value
-  for (const die of dice) {
+  // loop through the dice and counts;
+  for (let die of dice) {
     counts[die - 1]++;
   }
 
   let score = 0;
 
-  // Calculate the score for each condition
-  for (let i = 0; i < 6; i++) {
+  // loop through the six dice and add them to the score
+
+  for (let i = 0; i < dice.length; i++) {
+    // Three of a kind
     if (counts[i] >= 3) {
-      // Three of a kind
       if (i === 0) {
-        // Three 1s
         score += 1000;
       } else {
-        // Three of any other number
+        // Three of other number
         score += (i + 1) * 100;
       }
-      counts[i] -= 3; // Remove the used dice
+
+      // remove used dice
+      counts[i] -= 3;
     }
   }
 
-  // Add the remaining 1s and 5s to the score
-  score += counts[0] * 100; // Each 1 is worth 100 points
-  score += counts[4] * 50; // Each 5 is worth 50 points
-
+  score += counts[0] * 100;
+  score += counts[4] * 50;
   return score;
 }
 

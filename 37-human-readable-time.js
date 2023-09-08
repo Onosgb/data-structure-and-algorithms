@@ -11,11 +11,13 @@ You can find some examples in the test fixtures.
 
 function humanReadable(seconds) {
   seconds = Math.max(0, Math.min(359999, seconds));
-  let hrs = Math.floor(seconds / (60 * 60)),
-    mins = Math.floor((seconds % (60 * 60)) / 60),
-    sec = seconds % 60;
 
-  return `${hrs}:${mins}:${sec}`;
+  let hrs = Math.floor(seconds / 3600);
+  let mins = Math.floor((seconds % 3600) / 60);
+  let sec = seconds % 60;
+  return `${hrs.toString().padStart(2, "0")}:${mins
+    .toString()
+    .padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
 }
 
 let result = humanReadable(752);
