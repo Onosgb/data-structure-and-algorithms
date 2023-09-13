@@ -142,7 +142,6 @@ function fibonacci(n) {
 /* 
 The Millionth Fibonacci Kata
 
-
 The year is 1214. One night, Pope Innocent III awakens to find the the archangel Gabriel floating before him. Gabriel thunders to the pope:
 
 Gather all of the learned men in Pisa, especially Leonardo Fibonacci. In order for the crusades in the holy lands to be successful, these men must calculate the millionth number in Fibonacci's recurrence. Fail to do this, and your armies will never reclaim the holy land. It is His will.
@@ -162,7 +161,7 @@ In this kata you will have to calculate fib(n) where:
 fib(0) := 0
 fib(1) := 1
 fib(n + 2) := fib(n + 1) + fib(n)
-Write an algorithm that can handle n up to 2000000.
+Write an algorithm that can handle n up to 2,000,000.
 
 Your algorithm must output the exact integer answer, to full precision. Also, it must correctly handle negative numbers as input.
 
@@ -189,7 +188,6 @@ function multiplyMatrix(matrixA, matrixB) {
 }
 
 function powerMatrix(matrix, n) {
-  if (n === 1) return matrix;
   if (n % 2 === 0) {
     const half = powerMatrix(matrix, n / 2);
     return multiplyMatrix(half, half);
@@ -207,7 +205,7 @@ function fib(n) {
   if (n < 0) {
     return n % 2 === 0 ? -fib(-n) : fib(-n);
   }
-  if (n === 0) return 0n;
+
   const baseMatrix = [
     [1n, 1n],
     [1n, 0n],

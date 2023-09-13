@@ -1,59 +1,76 @@
 /* 
-Greed is a dice game played with five six-sided dice. Your mission, should you choose to accept it, is to score a throw according to these rules. You will always be given an array with five six-sided dice values.
+The Millionth Fibonacci Kata
 
- Three 1's => 1000 points
- Three 6's =>  600 points
- Three 5's =>  500 points
- Three 4's =>  400 points
- Three 3's =>  300 points
- Three 2's =>  200 points
- One   1   =>  100 points
- One   5   =>   50 point
-A single die can only be counted once in each roll. For example, a given "5" can only count as part of a triplet (contributing to the 500 points) or as a single 50 points, but not both in the same roll.
+The year is 1214. One night, Pope Innocent III awakens to find the the archangel Gabriel floating before him. Gabriel thunders to the pope:
 
-Example scoring
+Gather all of the learned men in Pisa, especially Leonardo Fibonacci. In order for the crusades in the holy lands to be successful, these men must calculate the millionth number in Fibonacci's recurrence. Fail to do this, and your armies will never reclaim the holy land. It is His will.
 
- Throw       Score
- ---------   ------------------
- 5 1 3 4 1   250:  50 (for the 5) + 2 * 100 (for the 1s)
- 1 1 1 3 1   1100: 1000 (for three 1s) + 100 (for the other 1)
- 2 4 4 5 4   450:  400 (for three 4s) + 50 (for the 5)
-In some languages, it is possible to mutate the input to the function. This is something that you should never do. If you mutate the input, you will not be able to pass all the tests.
+The angel then vanishes in an explosion of white light.
+
+Pope Innocent III sits in his bed in awe. How much is a million? he thinks to himself. He never was very good at math.
+
+He tries writing the number down, but because everyone in Europe is still using Roman numerals at this moment in history, he cannot represent this number. If he only knew about the invention of zero, it might make this sort of thing easier.
+
+He decides to go back to bed. He consoles himself, The Lord would never challenge me thus; this must have been some deceit by the devil. A pretty horrendous nightmare, to be sure.
+
+Pope Innocent III's armies would go on to conquer Constantinople (now Istanbul), but they would never reclaim the holy land as he desired.
+
+In this kata you will have to calculate fib(n) where:
+
+fib(0) := 0
+fib(1) := 1
+fib(n + 2) := fib(n + 1) + fib(n)
+Write an algorithm that can handle n up to 2,000,000.
+
+Your algorithm must output the exact integer answer, to full precision. Also, it must correctly handle negative numbers as input.
+
+HINT I: Can you rearrange the equation fib(n + 2) = fib(n + 1) + fib(n) to find fib(n) if you already know fib(n + 1) and fib(n + 2)? Use this to reason what value fib has to have for negative values.
+
+HINT II: See https://web.archive.org/web/20220614001843/https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.4
+
+
 */
 
-function calculateScore(dice) {
-  let counts = [0, 0, 0, 0, 0, 0];
-
-  // loop through the dice and counts;
-  for (let die of dice) {
-    counts[die - 1]++;
-  }
-
-  let score = 0;
-
-  // loop through the six dice and add them to the score
-
-  for (let i = 0; i < dice.length; i++) {
-    // Three of a kind
-    if (counts[i] >= 3) {
-      if (i === 0) {
-        score += 1000;
-      } else {
-        // Three of other number
-        score += (i + 1) * 100;
+function multiplyMatrix(matrixA, matrixB) {
+  const result = [
+    [0n, 0n],
+    [0n, 0n],
+  ];
+  for (let i = 0; i < 2; i++) {
+    for (let j = 0; j < 2; j++) {
+      for (let k = 0; k < 2; k++) {
+        result[i][j] += matrixA[i][k] * matrixB[k][j];
       }
-
-      // remove used dice
-      counts[i] -= 3;
     }
   }
-
-  score += counts[0] * 100;
-  score += counts[4] * 50;
-  return score;
+  return result;
 }
 
-// Example throws
-console.log(calculateScore([5, 1, 3, 4, 1])); // Output: 250
-console.log(calculateScore([1, 1, 1, 3, 1])); // Output: 1100
-console.log(calculateScore([2, 4, 4, 5, 4])); // Output: 450
+function powerMatrix(matrix, n) {
+  if (n % 2 === 0) {
+    const half = powerMatrix(matrix, n / 2);
+    return multiplyMatrix(half, half);
+  } else {
+    const half = powerMatrix(matrix, (n - 1) / 2);
+    const squared = multiplyMatrix(half, half);
+    return multiplyMatrix(matrix, squared);
+  }
+}
+
+function fib(n) {
+  if (n === 0) return 0n;
+  if (n === 1) return 1n;
+
+  if (n < 0) {
+    return n % 2 === 0 ? -fib(-n) : fib(-n);
+  }
+
+  const baseMatrix = [
+    [1n, 1n],
+    [1n, 0n],
+  ];
+  const resultMatrix = powerMatrix(baseMatrix, n - 1);
+  return resultMatrix[0][0];
+}
+
+console.log(fib(1016186).toString());
